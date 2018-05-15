@@ -14,19 +14,22 @@
 
 	<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black;"></canvas>
 				<!--img id="canvasImg" style="display:none;"-->
-	<input type="button" value="send" id="sendBtn" size="30" onclick="submit()">
+	<!-- <input type="button" value="send" id="sendBtn" size="30" onclick="submit()"> -->
 	<input type="button" value="clear" id="clrBtn" size="30" onclick="clearCanv()">
 	<div>
-		<form autocomplete="off">
-			<h4>Title</h4>
-			<input type="text" name="title" placeholder="Art title here"required>
-			<h4>Description (optional)</h4>
-			<textarea type="text" name="desc" placeholder="Put your description here" required></textarea>
-			<h4>Hashtags (optional)</h4>
-			<input type="text" name="tags" placeholder="#Your #tags #here">
-			<p>Make post anonymous?</p><input type="checkbox" name="isAnon" value="True" checked> 
-			
-			<input type="submit">
+		<form autocomplete="off" id="artForm" onsubmit="embedImageURL()">
+			<label>Title</label>
+			<input type="text" name="title" placeholder="Art title here" maxlength="45" required>
+			<label>Description (optional)</label>
+			<textarea type="text" name="desc" placeholder="Put your description here. 140 Characters Max." maxlength="140"></textarea>
+			<label>Hashtags (optional)</label>
+			<input type="text" name="tags" placeholder="#Your #tags #here" maxlength="45">
+			<label>Make post anonymous? <input type="checkbox" name="isAnon" value="True" checked></label>
+			<input type="text" name="imageURL" id="imageURL" hidden>
+			<p></p>
+			<!-- <button type="submit" class="btn btn-primary">Submit Artwork</button> -->
+			<button class="btn btn-primary" >Submit Artwork</button>
+
 		</form>
 	</div>
 

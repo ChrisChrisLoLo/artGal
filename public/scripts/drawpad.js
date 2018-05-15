@@ -60,3 +60,11 @@ function clearCanv() {
 	ctx.fillStyle = 'white';
 	ctx.fillRect(0,0,canvas.width, canvas.height);
 }
+
+function embedImageURL(){
+	var dataURL = canvas.toDataURL();
+	alert(dataURL);
+	document.getElementById("imageURL").value = dataURL;
+	console.log("yes");
+	return false
+}
