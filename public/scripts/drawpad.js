@@ -40,19 +40,20 @@ function draw(e){
 		ctx.moveTo(prevPos.x,prevPos.y);
 		ctx.lineTo(pos.x,pos.y);
 		ctx.stroke();
-		//ctx.arc(pos.x,pos.y,3,0,2*Math.PI);
-		//ctx.stroke();
-		//ctx.fillStyle = "black";
-		//ctx.fill();
 	}
 }
 
-function save() {
-	document.getElementById("canvasImg").style.border = "2px solid";
+// function save() {
+// 	document.getElementById("canvasImg").style.border = "2px solid";
+// 	var dataURL = canvas.toDataURL();
+// 	document.getElementById("canvasImg").src = dataURL;
+// 	document.getElementById("canvasImg").style.display = "inline";
+// 	//console.log(dataURL)
+// }
+
+function submit(){
 	var dataURL = canvas.toDataURL();
-	document.getElementById("canvasImg").src = dataURL;
-	document.getElementById("canvasImg").style.display = "inline";
-	//console.log(dataURL)
+	console.log(dataURL);
 }
 
 function clearCanv() {
