@@ -4,12 +4,13 @@ var Schema = mongoose.Schema;
 var DrawingSchema = new Schema(
     {
         title: {type:String, required:true, max:45},
-        image: {type:String, required:true},
+        imageURL: {type:String, required:true},
         desc: {type:String, max:140},
         tags: [{type:String}],
         creationDate: {type:Date, default:Date.now},
-        userID: {type:String, required:true},
-        rating: {type:Number, default:0}
+        isAnon: {type:Boolean,default:true},
+        userID: {type:String},
+        rating: {type:Number}
     }
 );
 

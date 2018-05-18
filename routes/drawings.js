@@ -8,11 +8,10 @@ var users_controller = require('../controllers/usersController');
 
 //Display some drawing search bar
 router.get('/', function(req, res, next) {
-  res.render('draw.hbs');
+  res.send("TODO: implement a search bar or something cute like that")
 });
 
 //Display a specific drawing
-router.get('/:drawingID/', (req,res)=>{
-});
+router.get('/:id', drawings_controller.drawing_detail);
 
 module.exports = router;
