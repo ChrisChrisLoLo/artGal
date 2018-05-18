@@ -13,11 +13,12 @@
 	</nav>
 
 	<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black;"></canvas>
-				<!--img id="canvasImg" style="display:none;"-->
-	<!-- <input type="button" value="send" id="sendBtn" size="30" onclick="submit()"> -->
+
 	<input type="button" value="clear" id="clrBtn" size="30" onclick="clearCanv()">
 	<div>
-		<form action="" method="post"autocomplete="off" id="artForm" onsubmit="embedImageURL()">
+		<!--form action="/routes/" method="post"autocomplete="off" id="artForm" onsubmit="embedImageURL()"-->
+
+		<form action="/draw/submit" method="post"autocomplete="off" id="artForm" onsubmit="embedImageURL()">
 			<label>Title</label>
 			<input type="text" name="title" placeholder="Art title here" maxlength="45" required>
 			<label>Description (optional)</label>

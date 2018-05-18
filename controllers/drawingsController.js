@@ -1,4 +1,8 @@
 var Drawing = require('../models/drawings');
+var bodyParser = require('body-parser');
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
+
 // Display list of all drawings.
 exports.drawing_list = function(req, res) {
     res.send('NOT IMPLEMENTED: drawing list');
@@ -16,7 +20,13 @@ exports.drawing_create_get = function(req, res) {
 
 // Handle drawing create on POST.
 exports.drawing_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: drawing create POST');
+    console.log(req);
+    //Check is post is valid
+    req.checkBody('title','This post requires a title').isLength({min:1}).trim();
+    req.checkBody('title','This title is too long').isLength({max:45}).trim();
+    req.checkBody('desc','Description is too long').isLength({max:140}).trim();
+    req.checkBody('tags','Too many letters in the tags').isLength({max:45}).trim();
+    req.checkBody('imageURL','Something went wrong with the image').isLength({min:1}).trim();
 };
 
 // Display drawing delete form on GET.
