@@ -65,7 +65,7 @@ exports.drawing_create_post = [
     //The characters that should be preserved, and NOT filtered includes '+','=',and '/'
     //TODO: use regex to filter "//" but not '/'
     sanitizeBody('imageURL').trim().customSanitizer(URL => {
-        URL = URL.replace(/[!"@#$%^&'()*,:;<=>?]/g, '');
+        URL = URL.replace(/[!"@#$%^&'*<>]/g, '');
         return URL;
     }),
     sanitizeBody('isAnon').trim().escape(),

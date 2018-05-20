@@ -3,6 +3,7 @@ var ctx = canvas.getContext('2d');
 var mousePressed = false;
 var prevPos = {x:0,y:0};
 var pos = {x:0,y:0};
+
 canvas.addEventListener("mousedown", function (e) {
 	pos = getMousePos(e);
 	prevPos = getMousePos(e);
@@ -30,7 +31,6 @@ function getMousePos(e) {
     };
 }
 
-
 function draw(e){
 	if (mousePressed){
 		prevPos = pos;
@@ -42,14 +42,6 @@ function draw(e){
 		ctx.stroke();
 	}
 }
-
-// function save() {
-// 	document.getElementById("canvasImg").style.border = "2px solid";
-// 	var dataURL = canvas.toDataURL();
-// 	document.getElementById("canvasImg").src = dataURL;
-// 	document.getElementById("canvasImg").style.display = "inline";
-// 	//console.log(dataURL)
-// }
 
 function submit(){
 	var dataURL = canvas.toDataURL();
@@ -64,6 +56,5 @@ function clearCanv() {
 function embedImageURL(){
 	var dataURL = canvas.toDataURL();
 	document.getElementById("imageURL").value = dataURL;
-	alert(dataURL);
 	return false
 }
