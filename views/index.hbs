@@ -3,9 +3,15 @@
 {{#each listDrawings}}
     <div class="drawingDiv">
         {{!--Can either use {{property}} or {{this.property}}--}}
-        <h3>{{title}}</h3>
+        {{!-- use triple-stache to decode or unescape sanitized html--}}
+        <a href="{{url}}"><h2>{{{title}}}</h2></a>
         {{!--Insert username here when implemented--}}
-        <h4>By: Anonymous</h4>
-        <img src="{{imageURL}}" width="20%"/>
+        <h3>By: Anonymous</h3>
+        <h4>Circa {{creationDate}}</h4>
+        <p><i>{{{desc}}}</i></p>
+        <a href="{{url}}">
+            <img src="{{imageURL}}"/>
+            {{!-- <img src="{{imageURL}}" width="20%"/> --}}
+        </a>
     </div>
 {{/each}}

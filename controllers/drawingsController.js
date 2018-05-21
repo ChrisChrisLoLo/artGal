@@ -6,12 +6,11 @@ const { sanitizeBody } = require('express-validator/filter');
 // Display list of all drawings.
 exports.drawing_list = function(req, res) {
     //TODO: put in userID and use the populate method 
-    Drawing.find({},'title imageURL')
+    Drawing.find({},'title imageURL desc creationDate')
         .limit(20)
+        .sort({creationDate:-1})
         .exec((err,listDrawings) => {
             if (err) {return next(err);}
-            console.log("EEEEEEEEEEEEEEEEEEE");
-            console.log(listDrawings);
             res.render('index',{listDrawings:listDrawings});
         });
     // Drawing.find({},(err,drawings)=>{
