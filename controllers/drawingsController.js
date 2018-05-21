@@ -73,15 +73,7 @@ exports.drawing_create_post = [
     sanitizeBody('title').trim().escape(),
     sanitizeBody('desc').trim().escape(),
     sanitizeBody('tags').trim().escape(),
-    //Line below does not use the escape method as the method encodes '/', which breaks the url.
-    //The code will sanitize for basic html to prevent XSS attacks via HTML, however this
-    //list may be incomplete (ie. vulnerable to injection attacks).
-    //The characters that should be preserved, and NOT filtered includes '+','=',and '/'
-    //TODO: use regex to filter "//" but not '/'
-    sanitizeBody('imageURL').trim().customSanitizer(URL => {
-        URL = URL.replace(/[!"@#$%^&'*<>]/g, '');
-        return URL;
-    }),
+    sanitizeBody('imageURL').trim().escape(),
     sanitizeBody('isAnon').trim().escape(),
     (req,res,next) => {
         const errors =validationResult(req);
