@@ -5,7 +5,22 @@ const { sanitizeBody } = require('express-validator/filter');
 
 // Display list of all drawings.
 exports.drawing_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: drawing list');
+    //TODO: put in userID and use the populate method 
+    Drawing.find({},'title imageURL')
+        .limit(20)
+        .exec((err,listDrawings) => {
+            if (err) {return next(err);}
+            console.log("EEEEEEEEEEEEEEEEEEE");
+            console.log(listDrawings);
+            res.render('index',{listDrawings:listDrawings});
+        });
+    // Drawing.find({},(err,drawings)=>{
+    //     var drawingMap = {};
+    //     drawings.forEach((drawing) =>{
+    //         drawings[drawing._id] = drawing;
+    //     });
+    //     res.send(drawingMap);
+    // });
 };
 
 // Display detail page for a specific drawing.

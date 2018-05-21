@@ -56,5 +56,5 @@ function clearCanv() {
 function embedImageURL(){
 	var dataURL = canvas.toDataURL();
 	document.getElementById("imageURL").value = dataURL;
-	return false
+	return false;
 }

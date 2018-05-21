@@ -1,2 +1,11 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>ArtGal</h1>
+<p>Welcome to ArtGal</p>
+{{#each listDrawings}}
+    <div class="drawingDiv">
+        {{!--Can either use {{property}} or {{this.property}}--}}
+        <h3>{{title}}</h3>
+        {{!--Insert username here when implemented--}}
+        <h4>By: Anonymous</h4>
+        <img src="{{imageURL}}" width="20%"/>
+    </div>
+{{/each}}
