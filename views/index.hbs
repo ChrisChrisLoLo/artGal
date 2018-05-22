@@ -1,25 +1,38 @@
-<h1>ArtGal</h1>
-<p>Welcome to ArtGal</p>
-{{#each listDrawings}}
-    <div class="drawingDiv">
-        <div class="d-flex bd-highlight mb-3">
-            <div class="p-2 bd-highlight">
-                {{!--Can either use {{property}} or {{this.property}}--}}
-                {{!-- use triple-stache to decode or unescape sanitized html--}}
-                <a href="{{url}}"><h2>{{{title}}}</h2></a>
-                {{!--Insert username here when implemented--}}
-                <p>By: Anonymous</p>
-                <p>Circa {{creationDate}}</p>
-                {{#if desc}}
-                    <p><i>{{{desc}}}</i></p>
-                {{/if}}
-            </div>
-            <div class="ml-auto p-2 bd-highlight"></div>
-                <a href="{{url}}">
-                    <img src="{{{imageURL}}}" draggable="false"/>
-                    {{!-- <img src="{{imageURL}}" width="20%"/> --}}
-                </a>
-            </div>
+        
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col">
+            <h1>ArtGal</h1>
+            <p>Welcome to ArtGal</p>
         </div>
     </div>
-{{/each}}
+    <div class="row">
+        <div class="col">
+            {{#each listDrawings}}
+                <div class="drawingDiv rounded">
+                    <div class="d-flex bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            {{!--Can either use {{property}} or {{this.property}}--}}
+                            {{!-- use triple-stache to decode or unescape sanitized html--}}
+                            <a href="{{url}}"><h2><b>{{{title}}}</b></h2></a>
+                            {{!--Insert username here when implemented--}}
+                            <p>Anonymous</p>
+                            <p>{{creationDate}}</p>
+                            {{#if desc}}
+                                <p><i>- {{{desc}}}</i></p>
+                            {{/if}}
+                        </div>
+                        <div class="ml-auto p-2 bd-highlight">
+                            <a href="{{url}}">
+                                <img class="rounded" src="{{{imageURL}}}" width="60%" draggable="false"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <div class="col-3 d-none d-md-block" style="background-color:blue">
+            <p>Space for some cool feature</p>
+        </div>
+    </div>
+</div>
