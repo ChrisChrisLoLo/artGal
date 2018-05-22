@@ -8,7 +8,7 @@ var users_controller = require('../controllers/usersController');
 
 //Display some drawing search bar
 router.get('/', function(req, res, next) {
-  res.send("TODO: implement a search bar or something cute like that")
+  res.send("TODO: implement a search bar or something cute like that");
 });
 
 //Display a specific drawing

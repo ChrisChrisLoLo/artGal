@@ -13,13 +13,6 @@ exports.drawing_list = function(req, res) {
             if (err) {return next(err);}
             res.render('index',{listDrawings:listDrawings});
         });
-    // Drawing.find({},(err,drawings)=>{
-    //     var drawingMap = {};
-    //     drawings.forEach((drawing) =>{
-    //         drawings[drawing._id] = drawing;
-    //     });
-    //     res.send(drawingMap);
-    // });
 };
 
 // Display detail page for a specific drawing.

@@ -2,16 +2,24 @@
 <p>Welcome to ArtGal</p>
 {{#each listDrawings}}
     <div class="drawingDiv">
-        {{!--Can either use {{property}} or {{this.property}}--}}
-        {{!-- use triple-stache to decode or unescape sanitized html--}}
-        <a href="{{url}}"><h2>{{{title}}}</h2></a>
-        {{!--Insert username here when implemented--}}
-        <h3>By: Anonymous</h3>
-        <h4>Circa {{creationDate}}</h4>
-        <p><i>{{{desc}}}</i></p>
-        <a href="{{url}}">
-            <img src="{{{imageURL}}}"/>
-            {{!-- <img src="{{imageURL}}" width="20%"/> --}}
-        </a>
+        <div class="d-flex bd-highlight mb-3">
+            <div class="p-2 bd-highlight">
+                {{!--Can either use {{property}} or {{this.property}}--}}
+                {{!-- use triple-stache to decode or unescape sanitized html--}}
+                <a href="{{url}}"><h2>{{{title}}}</h2></a>
+                {{!--Insert username here when implemented--}}
+                <p>By: Anonymous</p>
+                <p>Circa {{creationDate}}</p>
+                {{#if desc}}
+                    <p><i>{{{desc}}}</i></p>
+                {{/if}}
+            </div>
+            <div class="ml-auto p-2 bd-highlight"></div>
+                <a href="{{url}}">
+                    <img src="{{{imageURL}}}" draggable="false"/>
+                    {{!-- <img src="{{imageURL}}" width="20%"/> --}}
+                </a>
+            </div>
+        </div>
     </div>
 {{/each}}
