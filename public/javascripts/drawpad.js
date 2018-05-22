@@ -1,8 +1,15 @@
+//TODO: Drawing on canvas does not work if canvas is resized. Try fixing it with onresize()?
+
+"use strict";
 var canvas = document.getElementById('canvasHTML');
 var ctx = canvas.getContext('2d');
 var mousePressed = false;
 var prevPos = {x:0,y:0};
 var pos = {x:0,y:0};
+var brush = {
+	size:5,
+	colour:"#000000",
+}
 
 canvas.addEventListener("mousedown", function (e) {
 	pos = getMousePos(e);
@@ -32,15 +39,41 @@ function getMousePos(e) {
 }
 
 function draw(e){
+	"use strict";
 	if (mousePressed){
+		//Draws a line for the last mouse position to the current mouse postion
+		//and fills in a circle at the new position. The circle is to smooth out lines
 		prevPos = pos;
 		pos = getMousePos(e);
-		//console.log(pos)
+		ctx.lineWidth = brush.size;
 		ctx.beginPath();
 		ctx.moveTo(prevPos.x,prevPos.y);
 		ctx.lineTo(pos.x,pos.y);
 		ctx.stroke();
+		////ctx.lineWidth=0;
+		//Move cursor out of the area the circle will be drawn so the circle
+		//wont draw incorrectly		
+		ctx.moveTo(prevPos.x,prevPos.y);
+		ctx.arc(pos.x,pos.y,brush.size/2,0,2*Math.PI);
+		ctx.fillStyle = brush.colour;
+		ctx.fill();
 	}
+}
+
+//NOTE: Currently there is redundency in terms of assigning the value to both the brush property
+// as will as the ctx attributes. Currently there is no need for the brush variables whatsoever
+// as the ctx attributes can just be changed directly, this may change however, therefore both methods
+// are used. Once this script is finalized, one method or the other should be removed. 
+
+function changeBrushColour(newColour){
+	brush.colour = newColour;
+	ctx.strokeStyle = newColour;
+	ctx.fillStyle = newColour;
+}
+
+function changeBrushSize(newSize){
+	brush.size = newSize;
+	ctx.lineWidth = newSize;
 }
 
 function submit(){

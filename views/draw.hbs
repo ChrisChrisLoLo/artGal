@@ -4,10 +4,10 @@
 			<div class="d-flex justify-content-center">
 				<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black;"></canvas>
 				<div class="controlPanel">
-					<input type="color"><br/>
-					<input type="number"><br/>
-					<input type="range"><br/>
-					<input type="button" value="clear" id="clrBtn" size="30" onclick="clearCanv()"><br/>
+					<input type="color" id="colorInput" value="#000000" onchange="changeBrushColour(this.value)"><br/>
+					<input type="number" id="sizeButton" value="2" onchange="changeBrushSize(this.value)"><br/>
+					<input type="range" id="sizeRange" value="2" onchange="changeBrushSize(this.value)"><br/>
+					<input type="button" value="clear" id="clearButton" size="30" onclick="clearCanv()"><br/>
 				</div>
 			</div>
 		</div>
