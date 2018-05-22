@@ -74,6 +74,8 @@ function changeBrushColour(newColour){
 function changeBrushSize(newSize){
 	brush.size = newSize;
 	ctx.lineWidth = newSize;
+	document.getElementById("sizeRange").value = newSize;
+	document.getElementById("sizeInput").value = newSize;
 }
 
 function submit(){
