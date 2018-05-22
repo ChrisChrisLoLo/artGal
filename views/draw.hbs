@@ -1,19 +1,36 @@
-<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black;"></canvas>
-
-<input type="button" value="clear" id="clrBtn" size="30" onclick="clearCanv()">
-<div>
-	<form action="/draw/submit" method="post"autocomplete="off" id="artForm" onsubmit="embedImageURL()">
-		<p>Title:</p>
-		<input type="text" name="title" placeholder="Art title here" maxlength="45" required>
-		<p>Description (optional):</p>
-		<textarea type="text" name="desc" placeholder="Put your description here. 140 Characters Max." maxlength="140"></textarea>
-		<p>Hashtags (optional):</p>
-		<input type="text" name="tags" placeholder="#Your #tags #here" maxlength="45">
-		<p>Make post anonymous? <input type="checkbox" name="isAnon" value="true" checked></p>
-		<input type="text" name="imageURL" id="imageURL" hidden>
-		<p></p>
-		<button class="btn btn-primary" >Submit Artwork</button>
-	</form>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="d-flex justify-content-center">
+				<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black;"></canvas>
+				<div class="controlPanel">
+					<input type="color"><br/>
+					<input type="number"><br/>
+					<input type="range"><br/>
+					<input type="button" value="clear" id="clrBtn" size="30" onclick="clearCanv()"><br/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="d-flex justify-content-center">
+				<div class="rounded" style="background-color:darkgray">
+					<form action="/draw/submit" method="post" autocomplete="off" id="artForm" onsubmit="embedImageURL()">
+						<p>Title:</p>
+						<input type="text" name="title" placeholder="Art title here" maxlength="45" required>
+						<p>Description (optional):</p>
+						<textarea type="text" name="desc" placeholder="Put your description here. 140 Characters Max." maxlength="140"></textarea>
+						<p>Hashtags (optional):</p>
+						<input type="text" name="tags" placeholder="#Your #tags #here" maxlength="45">
+						<p>Make post anonymous? <input type="checkbox" name="isAnon" value="true" checked></p>
+						<input type="text" name="imageURL" id="imageURL" hidden>
+						<p></p>
+						<button class="btn btn-primary" >Submit Artwork</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
 <script src="/javascripts/drawpad.js"></script>
