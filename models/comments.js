@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 //Image needs more restrictions on it. XSS attacks could probably be exploited.
 var CommentSchema = new Schema(
     {
-        userID: {type:String, required:true},
+        userID: {type:String},
         artID: {type:String, required:true},
         desc: {type:String, max:140},
         creationDate: {type:Date, default:Date.now},
@@ -12,5 +12,10 @@ var CommentSchema = new Schema(
     }
 );
 
+CommentSchema
+.virtual('url')
+.get(function(){
+    return '/drawings/' + this.artID;
+});
 
 module.exports = mongoose.model('Comment', CommentSchema);

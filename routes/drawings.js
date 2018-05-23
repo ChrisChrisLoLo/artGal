@@ -14,4 +14,7 @@ router.get('/', function(req, res, next) {
 //Display a specific drawing
 router.get('/:id', drawings_controller.drawing_detail);
 
+//Post a comment on a drawing
+router.post('/comment',comments_controller.comment_create_post);
+
 module.exports = router;

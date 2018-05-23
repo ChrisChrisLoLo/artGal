@@ -6,6 +6,8 @@ var drawings_controller = require('../controllers/drawingsController');
 router.get('/',(req, res, next) => {
   res.render('draw.hbs');
 });
+
+/* POST drawing */
 router.post('/submit',drawings_controller.drawing_create_post);
 
 
