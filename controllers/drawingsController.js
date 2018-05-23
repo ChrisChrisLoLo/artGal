@@ -45,7 +45,8 @@ exports.drawing_detail = function(req, res, next) {
             tags:results.drawings.tags,
             creationDate:results.drawings.creationDate,
             userID:results.drawings.userID,
-            rating:results.drawings.rating
+            rating:results.drawings.rating,
+            id:results.drawings._id
         });
     });    
 };

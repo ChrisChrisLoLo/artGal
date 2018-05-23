@@ -1,22 +1,46 @@
-<img src="{{{imageURL}}}" draggable="false">
-<h1>{{{title}}}</h1>
-{{#if userId}}
-    <p>By:{{{userId}}}</p>
-{{else}}
-    <p>By: Anonymous</p>
-{{/if}}
-<p>Created at: {{creationDate}}</p>
-{{#if rating}}
-    <p>Rating: {{rating}}</p>
-{{else}}
-    <p>No ratings yet</p>
-{{/if}}
-{{#if desc}}
-    <p>Description: {{{desc}}}</p>
-{{/if}}
-{{!-- TODO tags currently cant be hidden as the hbs thinks the array of empty strings should be rendered}--}
-{{!-- {{#each tags}}
-    <p>Tags:{{{tags}}}</p>
-{{else}}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="{{{imageURL}}}" draggable="false">
+            <h1>{{{title}}}</h1>
+            {{#if userId}}
+                <p>By:{{{userId}}}</p>
+            {{else}}
+                <p>By: Anonymous</p>
+            {{/if}}
+            <p>Created at: {{creationDate}}</p>
+            {{#if rating}}
+                <p>Rating: {{rating}}</p>
+            {{else}}
+                <p>No Ratings yet</p>
+            {{/if}}
+            {{#if desc}}
+                <p>Description: {{{desc}}}</p>
+            {{/if}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{#if comments}}
+                <p>Comments</p>
+            {{else}}
+                <p>No Comments yet</p>
+            {{/if}}
+            <p>Leave a comment</p>
+            <field>
+                <form action="comment" method="post" autocomplete="off" id="commentForm">
+						<p>Description (optional):</p>
+						<textarea type="text" name="comment" placeholder="Leave a comment here. 140 Characters Max. Don't be a dick." maxlength="140" required></textarea><br/>
+						<input type="text" name="drawingID" value="{{{id}}}" hidden required/>
+                        <button class="btn btn-primary" >Submit Comment</button>
+				</form>
+            </field>
+        </div>
+    </div>
 
-{{/each}} --}}
+    {{!-- TODO tags currently cant be hidden as the hbs thinks the array of empty strings should be rendered}--}
+    {{!-- {{#each tags}}
+        <p>Tags:{{{tags}}}</p>
+    {{else}}
+    {{/each}} --}}
+</div>
