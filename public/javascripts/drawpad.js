@@ -7,7 +7,7 @@ var mousePressed = false;
 var prevPos = {x:0,y:0};
 var pos = {x:0,y:0};
 var brush = {
-	size:5,
+	size:2,
 	colour:"#000000",
 }
 

@@ -13,7 +13,7 @@ exports.drawing_list = function(req, res) {
         .exec((err,listDrawings) => {
             if (err) {return next(err);}
             res.render('index',{listDrawings:listDrawings});
-        });
+    });
 };
 
 // Display detail page for a specific drawing.
@@ -28,7 +28,9 @@ exports.drawing_detail = function(req, res, next) {
         //         .exec(callback);
         // },
         comments: (callback)=>{
-            Comment.find({},'userID desc creationDate')
+            Comment.find({
+                artID:req.params.id
+                },'userID desc creationDate')
                 .sort({creationDate:1})
                 .exec(callback);
         }
