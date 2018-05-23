@@ -2,11 +2,26 @@
 	<div class="row">
 		<div class="col">
 			<div class="d-flex justify-content-center">
+				{{!--TODO: make the canvas not warp in chrome--}}
 				<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black;"></canvas>
 				<div class="controlPanel">
-					<input type="color" id="colorInput" value="#000000" onchange="changeBrushColour(this.value)"><br/>
-					<input type="number" id="sizeInput" value="2" onchange="changeBrushSize(this.value)"><br/>
-					<input type="range" id="sizeRange" value="2" onchange="changeBrushSize(this.value)"><br/>
+					<input type="number" id="sizeInput" value="2" onclick="changeBrushSize(this.value)"><br/>
+					<input type="range" id="sizeRange" value="2" onclick="changeBrushSize(this.value)"><br/>
+					<input type="color" id="colorInput" class="btn" style="background-color:#666666" value="#666666" onclick="changeBrushColour(this.value)">
+					<input type="color" id="colorInput" class="btn" style="background-color:#666666" value="#666666" onclick="changeBrushColour(this.value)"><br/>
+					<input type="color" id="colorInput" class="btn" style="background-color:#666666" value="#666666" onclick="changeBrushColour(this.value)">
+					<input type="color" id="colorInput" class="btn" style="background-color:#666666" value="#666666" onclick="changeBrushColour(this.value)"><br/>
+
+					{{> colourButton colour="Black"}}
+					{{> colourButton colour="White"}}
+					{{> colourButton colour="#FF0000"}}
+					{{> colourButton colour="#FF7F00"}}
+					{{> colourButton colour="#FFFF00"}}
+					{{> colourButton colour="#00FF00"}}
+					{{> colourButton colour="#0000FF"}}
+					{{> colourButton colour="#4B0082"}}
+					{{> colourButton colour="#9400D3"}}
+					
 					<input type="button" value="clear" id="clearButton" size="30" onclick="clearCanv()"><br/>
 				</div>
 			</div>
