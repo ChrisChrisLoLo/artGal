@@ -21,8 +21,17 @@
     </div>
     <div class="row">
         <div class="col">
-            {{#if comments}}
-                <p>Comments</p>
+            {{#if listComments}}
+                {{#each listComments}}
+                    <div class="commentDiv rounded">
+                        {{#if userId}}
+                            <p>{{{userId}}}</p>
+                        {{else}}
+                            <p>Anonymous</p>
+                        {{/if}}
+                        <p>{{{desc}}}</p>
+                    </div>
+                {{/each}}
             {{else}}
                 <p>No Comments yet</p>
             {{/if}}

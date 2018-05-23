@@ -1,4 +1,5 @@
 var Drawing = require('../models/drawings');
+var Comment = require('../models/comments');
 var async = require('async');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -21,15 +22,16 @@ exports.drawing_detail = function(req, res, next) {
         drawings: (callback)=>{
             Drawing.findById(req.params.id)
                 .exec(callback);
-        }
+        },
         // users: (callback)=>{
         //     User.findById(req.params.id)
         //         .exec(callback);
-        // }
-        // comments: (callback)=>{
-        //     Comments.findById(req.params.id)
-        //         .exec(callback);
-        // }
+        // },
+        comments: (callback)=>{
+            Comment.find({},'userID desc creationDate')
+                .sort({creationDate:1})
+                .exec(callback);
+        }
     },function(err,results){
         if (err) {return next(err);}
         if (results.drawings==null){
@@ -46,7 +48,8 @@ exports.drawing_detail = function(req, res, next) {
             creationDate:results.drawings.creationDate,
             userID:results.drawings.userID,
             rating:results.drawings.rating,
-            id:results.drawings._id
+            id:results.drawings._id,
+            listComments:results.comments
         });
     });    
 };
