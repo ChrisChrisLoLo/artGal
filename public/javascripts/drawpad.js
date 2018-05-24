@@ -23,9 +23,9 @@ canvas.addEventListener("mousemove", function (e) {
 canvas.addEventListener("mouseup", function (e) {
 	mousePressed=false
 }, false);
-canvas.addEventListener("mouseout", function (e) {
-	mousePressed=false
-}, false);
+// canvas.addEventListener("mouseout", function (e) {
+// 	mousePressed=false
+// }, false);
 ctx.fillStyle = 'white';
 	ctx.fillRect(0,0,canvas.width, canvas.height);
 
@@ -93,3 +93,9 @@ function embedImageURL(){
 	document.getElementById("imageURL").value = dataURL;
 	return false;
 }
+
+// document.getElementById("colourInput1").addEventListener("onclick", function(event){
+// 	event.preventDefault();
+// 	console.log(document.getElementById("colourInput1").value);
+// 	changeBrushColour(document.getElementById("colourInput1").value);
+// });

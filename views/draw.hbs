@@ -7,13 +7,13 @@
 				<div class="controlPanel">
 					<input type="number" id="sizeInput" value="2" onclick="changeBrushSize(this.value)"><br/>
 					<input type="range" id="sizeRange" value="2" onclick="changeBrushSize(this.value)"><br/>
-					<input type="color" id="colorInput" class="btn" style="background-color:#666666" value="#666666" onclick="changeBrushColour(this.value)">
-					<input type="color" id="colorInput" class="btn" style="background-color:#666666" value="#666666" onclick="changeBrushColour(this.value)"><br/>
-					<input type="color" id="colorInput" class="btn" style="background-color:#666666" value="#666666" onclick="changeBrushColour(this.value)">
-					<input type="color" id="colorInput" class="btn" style="background-color:#666666" value="#666666" onclick="changeBrushColour(this.value)"><br/>
+					<input type="color" id="colourInput" class="btn" style="background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
+					<input type="color" id="colourInput" class="btn" style="background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
+					<input type="color" id="colourInput" class="btn" style="background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
+					<input type="color" id="colourInput" class="btn" style="background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
 
-					{{> colourButton colour="Black"}}
-					{{> colourButton colour="White"}}
+					{{> colourButton colour="#000000"}}
+					{{> colourButton colour="#FFFFFF"}}
 					{{> colourButton colour="#FF0000"}}
 					{{> colourButton colour="#FF7F00"}}
 					{{> colourButton colour="#FFFF00"}}
@@ -47,4 +47,6 @@
 		</div>
 	</div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"crossorigin="anonymous"></script>
+
 <script src="/javascripts/drawpad.js"></script>
