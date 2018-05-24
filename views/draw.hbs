@@ -1,29 +1,31 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
+			<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black ; cursor:crosshair ;"></canvas>
+		</div>
+		<div class="col">
 			<div class="d-flex justify-content-center">
 				{{!--TODO: make the canvas not warp in chrome--}}
-				<div style="position: relative;">
-					<canvas id="canvasHTML" width="300" height="300" style="position:absolute; left: 0; top: 0; border: 1px solid black; z-index:2"></canvas>
-					<canvas id="canvasCursorHTML" width="300" height="300" style="position:absolute; left: 0; top: 0; border: 1px solid black; z-index:1"></canvas>
-				</div>
+				
 				<div class="controlPanel">
-					<input type="number" id="sizeInput" value="2" onclick="changeBrushSize(this.value)"><br/>
-					<input type="range" id="sizeRange" value="2" onclick="changeBrushSize(this.value)"><br/>
-					<input type="color" id="colourInput" class="btn" style="background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
-					<input type="color" id="colourInput" class="btn" style="background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
-					<input type="color" id="colourInput" class="btn" style="background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
-					<input type="color" id="colourInput" class="btn" style="background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
+					<input type="number" id="sizeInput" value="2" min="1" onclick="changeBrushSize(this.value)"><br/>
+					<input type="range" id="sizeRange" value="2"  min="1" max="50" onclick="changeBrushSize(this.value)"><br/>
+					<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
+					<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
+					<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
+					<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
 
-					{{> colourButton colour="#000000"}}
-					{{> colourButton colour="#FFFFFF"}}
-					{{> colourButton colour="#FF0000"}}
-					{{> colourButton colour="#FF7F00"}}
-					{{> colourButton colour="#FFFF00"}}
-					{{> colourButton colour="#00FF00"}}
-					{{> colourButton colour="#0000FF"}}
-					{{> colourButton colour="#4B0082"}}
-					{{> colourButton colour="#9400D3"}}
+					{{!--Has ROYGBIV colours and ROYGBIV colour at %70 "lightness"--}}
+					
+					{{> colourButton colour="#000000"}}{{> colourButton colour="#FFFFFF"}}<br/>
+					{{> colourButton colour="#4D4D4D"}}{{> colourButton colour="#808080"}}<br/>
+					{{> colourButton colour="#FF0000"}}{{> colourButton colour="#FF6666"}}<br/>
+					{{> colourButton colour="#FF7F00"}}{{> colourButton colour="#FFB366"}}<br/>
+					{{> colourButton colour="#FFFF00"}}{{> colourButton colour="#FFFF66"}}<br/>
+					{{> colourButton colour="#00FF00"}}{{> colourButton colour="#66FF66"}}<br/>
+					{{> colourButton colour="#0000FF"}}{{> colourButton colour="#6666FF"}}<br/>
+					{{> colourButton colour="#4B0082"}}{{> colourButton colour="#BF66FF"}}<br/>
+					{{> colourButton colour="#9400D3"}}{{> colourButton colour="#D166FF"}}<br/>
 					
 					<input type="button" value="clear" id="clearButton" size="30" onclick="clearCanv()"><br/>
 				</div>
