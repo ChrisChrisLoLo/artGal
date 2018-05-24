@@ -3,7 +3,10 @@
 		<div class="col">
 			<div class="d-flex justify-content-center">
 				{{!--TODO: make the canvas not warp in chrome--}}
-				<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black;"></canvas>
+				<div style="position: relative;">
+					<canvas id="canvasHTML" width="300" height="300" style="position:absolute; left: 0; top: 0; border: 1px solid black; z-index:2"></canvas>
+					<canvas id="canvasCursorHTML" width="300" height="300" style="position:absolute; left: 0; top: 0; border: 1px solid black; z-index:1"></canvas>
+				</div>
 				<div class="controlPanel">
 					<input type="number" id="sizeInput" value="2" onclick="changeBrushSize(this.value)"><br/>
 					<input type="range" id="sizeRange" value="2" onclick="changeBrushSize(this.value)"><br/>
