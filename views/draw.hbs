@@ -1,57 +1,72 @@
-<div class="container">
-	<div class="row">
-		<div class="col">
-			<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black ; cursor:crosshair ;"></canvas>
-		</div>
-		<div class="col">
-			<div class="d-flex justify-content-center">
-				{{!--TODO: make the canvas not warp in chrome--}}
-				
-				<div class="controlPanel">
-					<input type="number" id="sizeInput" value="2" min="1" onclick="changeBrushSize(this.value)"><br/>
-					<input type="range" id="sizeRange" value="2"  min="1" max="50" onclick="changeBrushSize(this.value)"><br/>
-					<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
-					<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
-					<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
-					<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    {{>header}}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="d-flex justify-content-end">
+					<canvas id="canvasHTML" width="300" height="300" style="border: 1px solid black ; cursor:crosshair ;"></canvas>
+				</div>
+			</div>
+			<div class="col">
+				<div class="d-flex justify-content-start">
+					{{!--TODO: make the canvas not warp in chrome--}}
+					
+					<div class="controlPanel">
+						<input type="number" id="sizeInput" value="2" min="1" onclick="changeBrushSize(this.value)"><br/>
+						<input type="range" id="sizeRange" value="2"  min="1" max="50" onclick="changeBrushSize(this.value)"><br/>
+						<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
+						<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
+						<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)">
+						<input type="color" id="colourInput" class="btn" style="width:50px; height:20px; background-color:#666666" value="#666666" oninput="changeBrushColour(this.value)"><br/>
 
-					{{!--Has ROYGBIV colours and ROYGBIV colour at %70 "lightness"--}}
-					
-					{{> colourButton colour="#000000"}}{{> colourButton colour="#FFFFFF"}}<br/>
-					{{> colourButton colour="#4D4D4D"}}{{> colourButton colour="#808080"}}<br/>
-					{{> colourButton colour="#FF0000"}}{{> colourButton colour="#FF6666"}}<br/>
-					{{> colourButton colour="#FF7F00"}}{{> colourButton colour="#FFB366"}}<br/>
-					{{> colourButton colour="#FFFF00"}}{{> colourButton colour="#FFFF66"}}<br/>
-					{{> colourButton colour="#00FF00"}}{{> colourButton colour="#66FF66"}}<br/>
-					{{> colourButton colour="#0000FF"}}{{> colourButton colour="#6666FF"}}<br/>
-					{{> colourButton colour="#4B0082"}}{{> colourButton colour="#BF66FF"}}<br/>
-					{{> colourButton colour="#9400D3"}}{{> colourButton colour="#D166FF"}}<br/>
-					
-					<input type="button" value="clear" id="clearButton" size="30" onclick="clearCanv()"><br/>
+						{{!--Has ROYGBIV colours and ROYGBIV colour at %70 "lightness"--}}
+						
+						{{> colourButton colour="#000000"}}{{> colourButton colour="#FFFFFF"}}<br/>
+						{{> colourButton colour="#4D4D4D"}}{{> colourButton colour="#808080"}}<br/>
+						{{> colourButton colour="#FF0000"}}{{> colourButton colour="#FF6666"}}<br/>
+						{{> colourButton colour="#FF7F00"}}{{> colourButton colour="#FFB366"}}<br/>
+						{{> colourButton colour="#FFFF00"}}{{> colourButton colour="#FFFF66"}}<br/>
+						{{> colourButton colour="#00FF00"}}{{> colourButton colour="#66FF66"}}<br/>
+						{{> colourButton colour="#0000FF"}}{{> colourButton colour="#6666FF"}}<br/>
+						{{> colourButton colour="#4B0082"}}{{> colourButton colour="#BF66FF"}}<br/>
+						{{> colourButton colour="#9400D3"}}{{> colourButton colour="#D166FF"}}<br/>
+						
+						<input type="button" value="clear" id="clearButton" size="30" onclick="clearCanv()"><br/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="d-flex justify-content-center">
+					<div class="rounded" style="background-color:darkgray">
+						<form action="/draw/submit" method="post" autocomplete="off" id="artForm" onsubmit="embedImageURL()">
+							<p>Title:</p>
+							<input type="text" name="title" placeholder="Art title here" maxlength="45" required>
+							<p>Description (optional):</p>
+							<textarea type="text" name="desc" placeholder="Put your description here. 140 Characters Max." maxlength="140"></textarea>
+							<p>Hashtags (optional):</p>
+							<input type="text" name="tags" placeholder="#Your #tags #here" maxlength="45">
+							<p>Make post anonymous? <input type="checkbox" name="isAnon" value="true" checked></p>
+							<input type="text" name="imageURL" id="imageURL" hidden><br/>
+							<button class="btn btn-primary" >Submit Artwork</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col">
-			<div class="d-flex justify-content-center">
-				<div class="rounded" style="background-color:darkgray">
-					<form action="/draw/submit" method="post" autocomplete="off" id="artForm" onsubmit="embedImageURL()">
-						<p>Title:</p>
-						<input type="text" name="title" placeholder="Art title here" maxlength="45" required>
-						<p>Description (optional):</p>
-						<textarea type="text" name="desc" placeholder="Put your description here. 140 Characters Max." maxlength="140"></textarea>
-						<p>Hashtags (optional):</p>
-						<input type="text" name="tags" placeholder="#Your #tags #here" maxlength="45">
-						<p>Make post anonymous? <input type="checkbox" name="isAnon" value="true" checked></p>
-						<input type="text" name="imageURL" id="imageURL" hidden><br/>
-						<button class="btn btn-primary" >Submit Artwork</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"crossorigin="anonymous"></script>
 
-<script src="/javascripts/drawpad.js"></script>
+	<script src="/javascripts/drawpad.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>

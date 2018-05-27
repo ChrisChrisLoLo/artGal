@@ -12,7 +12,10 @@ exports.drawing_list = function(req, res) {
         .sort({creationDate:-1})
         .exec((err,listDrawings) => {
             if (err) {return next(err);}
-            res.render('index',{listDrawings:listDrawings});
+            res.render('index',{
+                title:"ArtGal",
+                listDrawings:listDrawings
+            });
     });
 };
 

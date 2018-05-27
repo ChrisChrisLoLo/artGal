@@ -6,9 +6,6 @@ var router = express.Router();
 var drawings_controller = require('../controllers/drawingsController');
 var users_controller = require('../controllers/usersController');
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index.hbs',{title:"ArtGal"});
-// });
 router.get('/', drawings_controller.drawing_list);
+router.get('/login',users_controller.login);
 module.exports = router;

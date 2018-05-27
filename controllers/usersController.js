@@ -1,6 +1,12 @@
 var User = require('../models/users');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
+
+//Display login page
+exports.login = (req,res)=>{
+    res.render('login',{title:"Login"});
+};
+
 // Display list of all users.
 exports.user_list = function(req, res) {
     res.send('NOT IMPLEMENTED: user list');

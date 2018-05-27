@@ -4,7 +4,7 @@ var drawings_controller = require('../controllers/drawingsController');
 
 /* GET users listing. */
 router.get('/',(req, res, next) => {
-  res.render('draw.hbs');
+  res.render('draw.hbs',{title:"Draw"});
 });
 
 /* POST drawing */
