@@ -14,9 +14,8 @@ exports.login_post = (req,res)=>{
             clientID:process.env.googleClientID,
             clientSecret:process.env.googleClientSecret
         }),()=>{
-
             //Passport callback function
+            
         }
-    )
-
+    );
 };
