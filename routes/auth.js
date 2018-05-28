@@ -11,6 +11,6 @@ var auth_controller = require('../controllers/authController');
 //router.get('/google', );
 router.get('/',auth_controller.login_page);
 
-//router.get('/google',auth_controller.auth_google);
+router.get('/google',auth_controller.auth_google);
 
 module.exports = router;

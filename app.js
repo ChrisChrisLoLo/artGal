@@ -1,28 +1,32 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var hbs = require('hbs');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const hbs = require('hbs');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
-var drawRouter = require('./routes/draw');
-var drawingsRouter = require('./routes/drawings');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const drawRouter = require('./routes/draw');
+const drawingsRouter = require('./routes/drawings');
 
 //load env variables
 require('dotenv').load();
 
-var app = express();
+const app = express();
 
 //Set up mongoose connection
-var mongoose = require('mongoose');
-var mongoDB = `mongodb://${process.env.dbuser}:${process.env.dbpassword}@ds117592.mlab.com:17592/artgal`;
+const mongoose = require('mongoose');
+const mongoDB = `mongodb://${process.env.dbuser}:${process.env.dbpassword}@ds117592.mlab.com:17592/artgal`;
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+//Set up passport connection
+const passportSetup = require('./config/passportSetup');
+
 
 // view engine setup
 hbs.registerPartials(__dirname + '/views/partials');
