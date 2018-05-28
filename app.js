@@ -7,6 +7,7 @@ var hbs = require('hbs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var authRouter = require('./routes/auth');
 var drawRouter = require('./routes/draw');
 var drawingsRouter = require('./routes/drawings');
 
@@ -39,6 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/auth',authRouter);
 app.use('/users', usersRouter);
 app.use('/draw', drawRouter);
 app.use('/drawings',drawingsRouter);
