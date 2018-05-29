@@ -46,14 +46,18 @@
                 {{else}}
                     <p>No Comments yet</p>
                 {{/if}}
-                <p>Leave a comment</p>
-                <field>
-                    <form action="comment" method="post" autocomplete="off" id="commentForm">
-                            <textarea type="text" name="comment" placeholder="Leave a comment here. 140 Characters Max. Don't be a dick." maxlength="140" required></textarea><br/>
-                            <input type="text" name="drawingID" value="{{{id}}}" hidden required/>
-                            <button class="btn btn-primary" >Submit Comment</button>
-                    </form>
-                </field>
+                {{#if user}}
+                    <field>
+                        <p>Leave a comment</p>
+                        <form action="comment" method="post" autocomplete="off" id="commentForm">
+                                <textarea type="text" name="comment" placeholder="Leave a comment here. 140 Characters Max. Don't be a dick." maxlength="140" required></textarea><br/>
+                                <input type="text" name="drawingID" value="{{{id}}}" hidden required/>
+                                <button class="btn btn-primary" >Submit Comment</button>
+                        </form>
+                    </field>
+                {{else}}
+                    <p>Please <a href="/auth">Login</a> to comment on this post.</p>
+                {{/if}}
             </div>
         </div>
 

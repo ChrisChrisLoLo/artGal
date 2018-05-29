@@ -13,6 +13,7 @@ var UserSchema = new Schema(
         creationDate: {type:Date, default:Date.now},
         banned: {type:Boolean, default:false},
         banEndDate: {type:Date},
+        rating: {type:Number, default:0}
     }
 );
 

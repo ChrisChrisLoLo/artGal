@@ -8,10 +8,23 @@
   <body>
     {{>header}}
     <div class ="container">
-        <div>
-            <h1>Login with:</h1><br/>
-            <a href="/auth/google" class="btn btn-primary">Google+</a>
+      {{#if error}}
+          <div class="row">
+            <div class="col">
+              <div>
+                <h3>Error: {{error}}</h3>
+              </div>
+            </div>
+          </div>
+      {{/if}}
+      <div class="row">
+        <div class="col">
+          <div>
+              <h1>Login with:</h1><br/>
+              <a href="/auth/google" class="btn btn-primary">Google+</a>
+          </div>
         </div>
+      </div>
     </div>
     {{>footer}}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"crossorigin="anonymous"></script>

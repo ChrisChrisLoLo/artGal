@@ -1,6 +1,9 @@
 var Comment = require('../models/comments');
+var User = require('../models/users');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
+const {authCheck} = require('./utils/authCheck');
+
 // Display list of all comments.
 exports.comment_list = function(req, res) {
     res.send('NOT IMPLEMENTED: comment list');
@@ -18,6 +21,8 @@ exports.comment_create_get = function(req, res) {
 
 // Handle comment create on POST.
 exports.comment_create_post = [
+    authCheck,
+
     body('comment','This comment is empty').isLength({min:1}).trim(),
     body('drawingID','An error occured attaching the drawingID').isLength({min:1}).trim(),
     sanitizeBody('comment').trim().escape(),
@@ -26,6 +31,7 @@ exports.comment_create_post = [
         const errors =validationResult(req);
         var comment = new Comment(
             {
+                userID: req.user._id,
                 artID: req.body.drawingID,
                 desc: req.body.comment
             }

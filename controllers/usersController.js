@@ -15,6 +15,7 @@ const {authCheck} = require('./utils/authCheck');
 exports.user_profile =[ 
     authCheck,
     (req,res) => {
+        console.log(req.user);
         res.render('profile',{
             title:'Your Profile',
             user:req.user

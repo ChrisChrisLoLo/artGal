@@ -10,7 +10,7 @@ var DrawingSchema = new Schema(
         creationDate: {type:Date, default:Date.now},
         isAnon: {type:Boolean,default:true},
         userID: {type:String},
-        rating: {type:Number}
+        rating: {type:Number,default:0}
     }
 );
 
