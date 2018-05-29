@@ -13,6 +13,10 @@ exports.auth_google = passport.authenticate('google',{
 
 //Callback route for google. THe difference between the this authenticate and
 //the authenticate above is that we now have a code embedded in out GET request.
-exports.auth_google_redirect = passport.authenticate('google'),(req,res) =>{
-    
-};
+exports.auth_google_redirect = [
+    passport.authenticate('google'),
+    (req,res) =>{
+        res.redirect('/users/profile')
+    }   
+];
+

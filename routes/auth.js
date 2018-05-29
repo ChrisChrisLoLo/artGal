@@ -14,4 +14,7 @@ router.get('/',auth_controller.login_page);
 router.get('/google',auth_controller.auth_google);
 
 router.get('/google/redirect',auth_controller.auth_google_redirect);
+// router.get('/google/redirect',(req,res)=>{
+//     res.send(req.user);
+// });
 module.exports = router;

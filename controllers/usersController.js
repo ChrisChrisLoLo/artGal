@@ -2,6 +2,24 @@ var User = require('../models/users');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
+//Checks if users are authorized to access content. Redirects them to login otherwise.
+var authCheck = (req,res,next) => {
+    if(!req.user){
+        res.redirect('/auth');
+    }
+    else{
+        next();
+    }
+};
+
+exports.user_profile =[ 
+    authCheck,
+    (req,res) => {
+        res.send(`You are: ${req.user.displayName}`);
+
+    }
+];
+
 // Display list of all users.
 exports.user_list = function(req, res) {
     res.send('NOT IMPLEMENTED: user list');
