@@ -3,6 +3,18 @@ var Comment = require('../models/comments');
 var async = require('async');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
+const {authCheck} = require('./utils/authCheck');
+
+exports.make_drawing = [
+    authCheck,
+    (req,res) => {
+        res.render('draw.hbs',{
+            title:"Draw",
+            user:req.user
+        });
+    }
+];
+
 
 // Display list of all drawings.
 exports.drawing_list = function(req, res) {
@@ -13,7 +25,8 @@ exports.drawing_list = function(req, res) {
         .exec((err,listDrawings) => {
             if (err) {return next(err);}
             res.render('index',{
-                title:"ArtGal",
+                title:'ArtGal',
+                user:req.user,
                 listDrawings:listDrawings
             });
     });
@@ -47,6 +60,7 @@ exports.drawing_detail = function(req, res, next) {
         console.log(results.drawings);
         res.render('drawing',{
             title:results.drawings.title,
+            user:req.user,
             imageURL:results.drawings.imageURL,
             desc:results.drawings.desc,
             tags:results.drawings.tags,

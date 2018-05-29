@@ -3,7 +3,10 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 //Display login page
 exports.login_page = (req,res)=>{
-    res.render('login',{title:"Login"});
+    res.render('login',{
+        title:'Login',
+        user:req.user
+    });
 };
 
 //Authenicate wiht google
