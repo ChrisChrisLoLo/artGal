@@ -1,6 +1,6 @@
 var Drawing = require('../models/drawings');
 var Comment = require('../models/comments');
-//var User = require('../models/users');
+var User = require('../models/users');
 var async = require('async');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -33,6 +33,10 @@ exports.drawing_list = function(req, res) {
     });
 };
 
+//NOTE: The way the comments are being loaded in is "cheating" in the sense that they are not
+//being populated from the drawings model. This is certainly poor design and may cause future issues
+//Be sure to fix the drawings and comments model before publishing.
+
 // Display detail page for a specific drawing.
 exports.drawing_detail = function(req, res, next) {
     async.parallel({
@@ -45,9 +49,11 @@ exports.drawing_detail = function(req, res, next) {
         //         .exec(callback);
         // },
         comments: (callback)=>{
-            Comment.find({
+            Comment
+                .find({
                 artID:req.params.id
-                },'userID desc creationDate')
+                },'desc creationDate')
+                .populate('authorID','displayName')
                 .sort({creationDate:1})
                 .exec(callback);
         }
@@ -58,7 +64,7 @@ exports.drawing_detail = function(req, res, next) {
             err.status = 404;
             return next(err);
         }
-        console.log(results.drawings);
+        console.log(results.comments);
         res.render('drawing',{
             title:results.drawings.title,
             user:req.user,

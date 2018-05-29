@@ -29,9 +29,12 @@ exports.comment_create_post = [
     sanitizeBody('drawingID').trim().escape(),
     (req,res,next) => {
         const errors =validationResult(req);
+        // console.log("INFOR");
+        // console.log(req.user._id);
+        // console.log(req.user);
         var comment = new Comment(
             {
-                userID: req.user._id,
+                authorID: req.user._id,
                 artID: req.body.drawingID,
                 desc: req.body.comment
             }

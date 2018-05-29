@@ -3,7 +3,11 @@ var Schema = mongoose.Schema;
 //Image needs more restrictions on it. XSS attacks could probably be exploited.
 var CommentSchema = new Schema(
     {
-        userID: {type:String, required:true},
+        authorID: {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User',
+            required:true,
+        },
         artID: {type:String, required:true},
         desc: {type:String, max:140, required:true},
         creationDate: {type:Date, default:Date.now},
