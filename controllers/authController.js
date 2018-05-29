@@ -16,7 +16,11 @@ exports.auth_google = passport.authenticate('google',{
 exports.auth_google_redirect = [
     passport.authenticate('google'),
     (req,res) =>{
-        res.redirect('/users/profile')
+        res.redirect('/')
     }   
 ];
 
+exports.auth_logout = (req,res) => {
+    req.logout();
+    res.redirect('/');
+};
