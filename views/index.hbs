@@ -24,7 +24,7 @@
                                 {{!-- use triple-stache to decode or unescape sanitized html--}}
                                 <a href="{{url}}"><h2><b>{{{title}}}</b></h2></a>
                                 {{!--Insert username here when implemented--}}
-                                <p>Anonymous</p>
+                                <p>{{artistID.displayName}}</p>
                                 <p>{{creationDate}}</p>
                                 {{#if desc}}
                                     <p><i>- {{{desc}}}</i></p>

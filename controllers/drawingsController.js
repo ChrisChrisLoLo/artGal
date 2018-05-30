@@ -23,7 +23,9 @@ exports.drawing_list = function(req, res) {
     Drawing.find({},'title imageURL desc creationDate')
         .limit(20)
         .sort({creationDate:-1})
+        .populate('artistID','displayName')
         .exec((err,listDrawings) => {
+            console.log(listDrawings);
             if (err) {return next(err);}
             res.render('index',{
                 title:'ArtGal',
@@ -42,6 +44,7 @@ exports.drawing_detail = function(req, res, next) {
     async.parallel({
         drawings: (callback)=>{
             Drawing.findById(req.params.id)
+                .populate('artistID','displayName')
                 .exec(callback);
         },
         // users: (callback)=>{
@@ -72,7 +75,7 @@ exports.drawing_detail = function(req, res, next) {
             desc:results.drawings.desc,
             tags:results.drawings.tags,
             creationDate:results.drawings.creationDate,
-            userID:results.drawings.userID,
+            artistID:results.drawings.artistID,
             rating:results.drawings.rating,
             id:results.drawings._id,
             listComments:results.comments
@@ -86,8 +89,9 @@ exports.drawing_create_get = function(req, res) {
 };
 
 // Handle drawing create on POST.
-// Self note: the reason why this is an array is bc this is a middleware chain
+// Self note: the reason why this is an array is because this is a middleware chain
 exports.drawing_create_post = [
+    authCheck,
     body('title','This post requires a title').isLength({min:1}).trim(),
     body('title','This title is too long').isLength({max:45}).trim(),
     body('desc','Description is too long').isLength({max:140}).trim(),
@@ -106,6 +110,7 @@ exports.drawing_create_post = [
             imageURL:req.body.imageURL,
             desc:req.body.desc,
             tags:req.body.tags,
+            artistID:req.user._id,
             isAnon:req.body.isAnon==='true'
             }
         );

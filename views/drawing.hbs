@@ -13,8 +13,8 @@
             <div class="col">
                 <img src="{{{imageURL}}}" draggable="false">
                 <h1>{{{title}}}</h1>
-                {{#if userId}}
-                    <p>By:{{{userId}}}</p>
+                {{#if artistID}}
+                    <p>By: {{artistID.displayName}}</p>
                 {{else}}
                     <p>By: Anonymous</p>
                 {{/if}}

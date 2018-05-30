@@ -9,7 +9,11 @@ var DrawingSchema = new Schema(
         tags: [{type:String}],
         creationDate: {type:Date, default:Date.now},
         isAnon: {type:Boolean,default:true},
-        userID: {type:String},
+        artistID: {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User',
+            required:true,
+        },
         rating: {type:Number,default:0}
     }
 );
