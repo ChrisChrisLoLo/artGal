@@ -8,7 +8,7 @@ var DrawingSchema = new Schema(
         desc: {type:String, max:140},
         tags: [{type:String}],
         creationDate: {type:Date, default:Date.now},
-        isAnon: {type:Boolean,default:true},
+        isAnon: {type:Boolean,required:true,default:false},
         artistID: {
             type:mongoose.Schema.Types.ObjectId,
             ref:'User',

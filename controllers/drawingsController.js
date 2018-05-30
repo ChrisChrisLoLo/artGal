@@ -20,13 +20,28 @@ exports.make_drawing = [
 // Display list of all drawings.
 exports.drawing_list = function(req, res) {
     //TODO: put in userID and use the populate method 
-    Drawing.find({},'title imageURL desc creationDate')
+    Drawing.find({})
         .limit(20)
         .sort({creationDate:-1})
         .populate('artistID','displayName')
         .exec((err,listDrawings) => {
-            console.log(listDrawings);
+            //console.log(listDrawings);
             if (err) {return next(err);}
+
+            //Loop that hides a drawing's artist if the artist has chosen painting to be
+            //anonymous. We do not directly change the drawings displayName as the displayName property
+            //is a reference, and will set all other paintings of the same user to 'Anonymous'. 
+            for (var i=0;i<listDrawings.length;i++){
+                if(listDrawings[i].isAnon === true){
+                    listDrawings[i].publicName = 'Anonymous';
+                }
+                else{
+                    listDrawings[i].publicName = listDrawings[i].artistID.displayName;
+                }
+                console.log(listDrawings[i]);
+
+            }
+
             res.render('index',{
                 title:'ArtGal',
                 user:req.user,
@@ -61,13 +76,19 @@ exports.drawing_detail = function(req, res, next) {
                 .exec(callback);
         }
     },function(err,results){
+        var publicArtist;
         if (err) {return next(err);}
         if (results.drawings==null){
             var err = new Error('Drawing not found');
             err.status = 404;
             return next(err);
         }
-        console.log(results.comments);
+        if (results.drawings.isAnon === true){
+            publicArtist = 'Anonymous';
+        }
+        else{
+            publicArtist = results.drawings.artistID.displayName;
+        }
         res.render('drawing',{
             title:results.drawings.title,
             user:req.user,
@@ -75,7 +96,7 @@ exports.drawing_detail = function(req, res, next) {
             desc:results.drawings.desc,
             tags:results.drawings.tags,
             creationDate:results.drawings.creationDate,
-            artistID:results.drawings.artistID,
+            publicArtist:publicArtist,
             rating:results.drawings.rating,
             id:results.drawings._id,
             listComments:results.comments
