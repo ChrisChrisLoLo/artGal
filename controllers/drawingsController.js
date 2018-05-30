@@ -38,8 +38,13 @@ exports.drawing_list = function(req, res) {
                 else{
                     listDrawings[i].publicName = listDrawings[i].artistID.displayName;
                 }
+                listDrawings[i].displayDate = listDrawings[i].creationDate
+                                                            .toLocaleDateString('en-US',{
+                                                                year:'numeric',
+                                                                month:'short',
+                                                                day:'numeric'
+                                                            });
                 console.log(listDrawings[i]);
-
             }
 
             res.render('index',{
