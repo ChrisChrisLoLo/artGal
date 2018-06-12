@@ -4,7 +4,9 @@ var Schema = mongoose.Schema;
 var DrawingSchema = new Schema(
     {
         title: {type:String, required:true, max:45},
-        imageURL: {type:String, required:true},
+        //NOTE: there were 6766 chars in a tested image, so this imageCap should
+        //suffice. However this is an assumption for now and may cause issues later.
+        imageURL: {type:String, required:true, max:7000},
         desc: {type:String, max:140},
         tags: [{type:String}],
         creationDate: {type:Date, default:Date.now},

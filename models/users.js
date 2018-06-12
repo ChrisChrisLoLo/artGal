@@ -13,7 +13,7 @@ var UserSchema = new Schema(
         lastName: {type:String,max:35},
         gender: {type:String, max:15},
         profileDesc: {type:String, max:140},
-        profilePicURL: {type:String,default:defProfileURL},
+        profilePicURL: {type:String,default:defProfileURL,max:7000},
         creationDate: {type:Date, default:Date.now},
         banned: {type:Boolean, default:false},
         banEndDate: {type:Date},
