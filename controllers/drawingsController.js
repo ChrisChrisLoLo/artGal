@@ -36,7 +36,14 @@ exports.drawing_list = function(req, res) {
                     listDrawings[i].publicName = 'Anonymous';
                 }
                 else{
-                    listDrawings[i].publicName = listDrawings[i].artistID.displayName;
+                    try{
+                        listDrawings[i].publicName = listDrawings[i].artistID.displayName;
+                    }
+                    //Artist has been deleted
+                    catch(error){
+                        console.log(error);
+                        listDrawings[i].publicName = '[Removed]';
+                    }
                 }
                 listDrawings[i].displayDate = listDrawings[i].creationDate
                                                             .toLocaleDateString('en-US',{
@@ -92,13 +99,20 @@ exports.drawing_detail = function(req, res, next) {
             publicArtist = 'Anonymous';
         }
         else{
-            publicArtist = results.drawings.artistID.displayName;
+            try{
+                publicArtist = results.drawings.artistID.displayName;
+            }
+            catch(error){
+                console.log(error);
+                publicArtist = '[Removed]';
+            }
         }
         var formattedDate = results.drawings.creationDate.toLocaleDateString('en-US',{
                 year:'numeric',
                 month:'short',
                 day:'numeric'
             });
+        
         res.render('drawing',{
             title:results.drawings.title,
             user:req.user,

@@ -30,12 +30,11 @@
                 {{#if listComments}}
                     {{#each listComments}}
                         <div class="commentDiv rounded">
-                            <p>{{authorID.displayName}}</p>
-                            {{!-- {{#if authorId}}
-                                <p>{{{authorId}}}</p>
+                            {{#if authorID.displayName}}
+                                <p>{{authorID.displayName}}</p>
                             {{else}}
-                                <p>Anonymous</p>
-                            {{/if}} --}}
+                                <p>[Removed]</p>
+                            {{/if}}
                             <p>Created at: {{creationDate}}</p>
                             <p>{{{desc}}}</p>
                         </div>
