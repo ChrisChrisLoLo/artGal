@@ -94,13 +94,18 @@ exports.drawing_detail = function(req, res, next) {
         else{
             publicArtist = results.drawings.artistID.displayName;
         }
+        var formattedDate = results.drawings.creationDate.toLocaleDateString('en-US',{
+                year:'numeric',
+                month:'short',
+                day:'numeric'
+            });
         res.render('drawing',{
             title:results.drawings.title,
             user:req.user,
             imageURL:results.drawings.imageURL,
             desc:results.drawings.desc,
             tags:results.drawings.tags,
-            creationDate:results.drawings.creationDate,
+            creationDate:formattedDate,
             publicArtist:publicArtist,
             rating:results.drawings.rating,
             id:results.drawings._id,
