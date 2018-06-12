@@ -31,7 +31,22 @@ exports.drawing_list = function(req, res) {
             //Loop that hides a drawing's artist if the artist has chosen painting to be
             //anonymous. We do not directly change the drawings displayName as the displayName property
             //is a reference, and will set all other paintings of the same user to 'Anonymous'. 
+
             for (var i=0;i<listDrawings.length;i++){
+                //Note: I cant get comment count since there are asynchronous issues going on
+                //That I do not understand how to resolve. I'm sure there is an easy fix but
+                //trying to get the query to change a global variable won't work.
+
+                // //Get comment count
+                // Comment.count({ artID: listDrawings[i]._id}, function (err, count) {
+                //     if (err) {return next(err);}
+                //     console.log(count)
+                //     return count;                
+                // });
+                // listDrawings[i].commentCount = commentCount;
+
+
+                //Replace author name if anonymous
                 if(listDrawings[i].isAnon === true){
                     listDrawings[i].publicName = 'Anonymous';
                 }
@@ -45,6 +60,8 @@ exports.drawing_list = function(req, res) {
                         listDrawings[i].publicName = '[Removed]';
                     }
                 }
+
+                //Format date
                 listDrawings[i].displayDate = listDrawings[i].creationDate
                                                             .toLocaleDateString('en-US',{
                                                                 year:'numeric',
