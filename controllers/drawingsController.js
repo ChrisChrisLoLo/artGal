@@ -5,6 +5,8 @@ var async = require('async');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const {authCheck} = require('./utils/authCheck');
+//Max images/entries allowed per page 
+const MAX_IMAGES = 20;
 
 exports.make_drawing = [
     authCheck,
@@ -16,12 +18,16 @@ exports.make_drawing = [
     }
 ];
 
-
 // Display list of all drawings.
 exports.drawing_list = function(req, res) {
-    //TODO: put in userID and use the populate method 
+    //TODO: put in userID and use the populate method
+    let skipEntryAmount = 0;
+    if (req.param.pageCount !== null){
+        skipEntryAmount= (req.params.pageCount-1)*MAX_IMAGES
+    } 
     Drawing.find({})
-        .limit(20)
+        .limit(MAX_IMAGES)
+        .skip(skipEntryAmount)
         .sort({creationDate:-1})
         .populate('artistID','displayName')
         .exec((err,listDrawings) => {
@@ -34,7 +40,7 @@ exports.drawing_list = function(req, res) {
 
             for (var i=0;i<listDrawings.length;i++){
                 //Note: I cant get comment count since there are asynchronous issues going on
-                //That I do not understand how to resolve. I'm sure there is an easy fix but
+                //and I don't understand how to resolve them. I'm sure there is an easy fix but
                 //trying to get the query to change a global variable won't work.
 
                 // //Get comment count
@@ -44,7 +50,6 @@ exports.drawing_list = function(req, res) {
                 //     return count;                
                 // });
                 // listDrawings[i].commentCount = commentCount;
-
 
                 //Replace author name if anonymous
                 if(listDrawings[i].isAnon === true){
@@ -56,11 +61,10 @@ exports.drawing_list = function(req, res) {
                     }
                     //Artist has been deleted
                     catch(error){
-                        console.log(error);
+                        //console.log(error);
                         listDrawings[i].publicName = '[Removed]';
                     }
                 }
-
                 //Format date
                 listDrawings[i].displayDate = listDrawings[i].creationDate
                                                             .toLocaleDateString('en-US',{
@@ -68,9 +72,8 @@ exports.drawing_list = function(req, res) {
                                                                 month:'short',
                                                                 day:'numeric'
                                                             });
-                console.log(listDrawings[i]);
+                //console.log(listDrawings[i]);
             }
-
             res.render('index',{
                 title:'ArtGal',
                 user:req.user,
@@ -78,6 +81,7 @@ exports.drawing_list = function(req, res) {
             });
     });
 };
+
 
 //NOTE: The way the comments are being loaded in is "cheating" in the sense that they are not
 //being populated from the drawings model. This is certainly poor design and may cause future issues

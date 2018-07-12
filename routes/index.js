@@ -7,4 +7,6 @@ var drawings_controller = require('../controllers/drawingsController');
 
 router.get('/', drawings_controller.drawing_list);
 
+router.get('/p/:pageCount', drawings_controller.drawing_list);
+
 module.exports = router;
