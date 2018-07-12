@@ -6,7 +6,7 @@ const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const {authCheck} = require('./utils/authCheck');
 //Max images/entries allowed per page 
-const MAX_IMAGES = 20;
+const MAX_DRAWINGS = 20;
 
 exports.make_drawing = [
     authCheck,
@@ -20,13 +20,23 @@ exports.make_drawing = [
 
 // Display list of all drawings.
 exports.drawing_list = function(req, res) {
+    let currentPageNum = 1
+    if (req.params.pageCount){
+        currentPageNum = parseInt(req.params.pageCount);
+    }
+    
+    let isFirstPage = false;
+    let isLastPage = false;
+    
+
     //TODO: put in userID and use the populate method
     let skipEntryAmount = 0;
     if (req.param.pageCount !== null){
-        skipEntryAmount= (req.params.pageCount-1)*MAX_IMAGES
-    } 
+        skipEntryAmount = (currentPageNum-1)*MAX_DRAWINGS
+    }
+
     Drawing.find({})
-        .limit(MAX_IMAGES)
+        .limit(MAX_DRAWINGS)
         .skip(skipEntryAmount)
         .sort({creationDate:-1})
         .populate('artistID','displayName')
@@ -74,10 +84,23 @@ exports.drawing_list = function(req, res) {
                                                             });
                 //console.log(listDrawings[i]);
             }
+
+            //Check if this will be the first page, the last, or neither
+            console.log(currentPageNum)
+            if (currentPageNum === null || currentPageNum === 1){
+                isFirstPage = true;
+            }
+            if (listDrawings.length < MAX_DRAWINGS){
+                isLastPage = true;
+            }
+            console.log(isFirstPage);
+            console.log(isLastPage);
             res.render('index',{
                 title:'ArtGal',
                 user:req.user,
-                listDrawings:listDrawings
+                listDrawings:listDrawings,
+                isFirstPage:isFirstPage,
+                isLastPage:isLastPage
             });
     });
 };

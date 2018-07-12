@@ -18,6 +18,10 @@
     <div class="container" style="margin-top:20px">
         <div class="row">
             <div class="col">
+                {{#unless listDrawings}}
+                    <h3>There's no content here! You probably went past the page count.</h3>
+                    <a href="/"><h5>Go Back</h5></a>
+                {{/unless}}
                 {{#each listDrawings}}
                     <div class="drawingDiv rounded">
                         <div class="d-flex bd-highlight justify-content-left mb-3">
@@ -50,15 +54,22 @@
                 <h3>Search for tags:</h3>
             </div>
         </div>
+        {{!--TODO: USE FLEXBOX FOR THE BUTTONS INSTEAD OF COLS--}}
         <div class="row" id="pageControlRow">
-            <div class="col">
-                <div>
-                    <button onclick="prevPage()">prev</button>
+            {{#unless isFirstPage}}
+                <div class="col-sm-4">
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="prevPage()">prev</button>
+                    </div>
                 </div>
-                <div>
-                    <button onclick="nextPage()">next</button>
+            {{/unless}}
+            {{#unless isLastPage}}
+                <div class="col-sm-4 offset-sm-4">
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="nextPage()">next</button>
+                    </div>                
                 </div>
-            </div>
+            {{/unless}}
         </div>
     </div>
     {{>footer}}
