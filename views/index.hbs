@@ -56,20 +56,20 @@
         </div>
         {{!--TODO: USE FLEXBOX FOR THE BUTTONS INSTEAD OF COLS--}}
         <div class="row" id="pageControlRow">
-            {{#unless isFirstPage}}
-                <div class="col-sm-4">
-                    <div class="text-center">
-                        <button class="btn btn-primary" onclick="prevPage()">prev</button>
-                    </div>
+            <div class="col">
+                <div class="d-flex">
+                    {{#unless isFirstPage}}
+                        <div class="mr-auto p-2">
+                            <button class="btn btn-primary" onclick="prevPage()">prev</button>
+                        </div>
+                    {{/unless}}
+                    {{#unless isLastPage}}
+                        <div class="ml-auto p-2">
+                            <button class="btn btn-primary" onclick="nextPage()">next</button>              
+                        </div>
+                    {{/unless}}
                 </div>
-            {{/unless}}
-            {{#unless isLastPage}}
-                <div class="col-sm-4 offset-sm-4">
-                    <div class="text-center">
-                        <button class="btn btn-primary" onclick="nextPage()">next</button>
-                    </div>                
-                </div>
-            {{/unless}}
+            </div>
         </div>
     </div>
     {{>footer}}
