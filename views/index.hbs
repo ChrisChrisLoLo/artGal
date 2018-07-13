@@ -49,12 +49,47 @@
                 {{/each}}
             </div>
             <div class="col-3 d-none d-md-block drawingDiv rounded">
-                <h3>Top Drawings:</h3>
-                <h3>Top Users:</h3>
-                <h3>Search for tags:</h3>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseAbout" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    About
+                </a>
+                <div class="collapse" id="collapseAbout">
+                    <div class="card card-body">
+                        <p>
+                            This is a pet project I have been working on for a while now.
+                            It's a simple social media like web app where the primary content consists of simple drawings.
+                            The backend uses NodeJS. While there are elements I would like to further work on, the site in it's
+                            current state is functional. Anyone is free to view and post submissions, simply login with Google+
+                            to post comments/submissions. 
+                        </p>
+                    </div>
+                </div>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseRules" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Rules
+                </a>
+                <div class="collapse" id="collapseRules">
+                    <div class="card card-body">
+                        <ul>
+                            <li>You must only use the given tools to make your drawing.</li>
+                            <li>No offensive content.</li>
+                            <li>Absolutely <b><i><u>ZERO</u></i></b> (0) dolphin drawings allowed.</li>
+                            <li>Be decent in the comments, and in general.</li>
+                            <li>I can make any new rule if I forget something.</li>
+                            <li>You can be banned for infracting any of the above rules.</li>
+                        </ul>
+                    </div>
+                </div>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseContact" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Contact
+                </a>
+                <div class="collapse" id="collapseContact">
+                    <div class="card card-body">
+                        <p>
+                            <a href="https://github.com/ChrisChrisLoLo">Made by Christian Lo</a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-        {{!--TODO: USE FLEXBOX FOR THE BUTTONS INSTEAD OF COLS--}}
         <div class="row" id="pageControlRow">
             <div class="col">
                 <div class="d-flex">
