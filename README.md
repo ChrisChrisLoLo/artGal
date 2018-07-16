@@ -1,6 +1,7 @@
 # artGal
 Art gallery web app that hosts MS Paint-like images.
-
+Check out using the following link. Please wait a few moments to load to allow for heroku to boot the app up. Feel free to play around with it. While I will moderate content from time to time, please do not post anything inappropriate and please don't get too offended if I haven't gotten around to removing any inappropriate content.
+https://hidden-refuge-97022.herokuapp.com/
 # About
 This web app allows users to sign in, create and post drawings, as well as comment on them.
 This web app focuses on several concepts that are used in full scale web apps, and on top of simple CRUD actions, the web app
